@@ -9,5 +9,6 @@ import fetch
 # mc.postToChat("hello world")
 
 if __name__ == '__main__':
+    fetch.initialize()
     mc = minecraft.Minecraft.create()
-    render.draw_simple_wall(mc, (2,2,2), (0,100), fetch.get_simple_data('http://...', 'foo', 'bar', 'ohwhatshouldweputhere'))
+    render.draw_simple_wall(mc, (2,2,2), (0,100), fetch.get_simple_data(query='avg:system.cpu.idle{*}', delay=300))
