@@ -36,7 +36,7 @@ MAX_VALUE_LIMIT = 0.000000001
 
 
 def simple_normalize(input):
-    first_col = [float(x[1]) for x in input]
+    first_col = [float(max(x[1], 0.0)) for x in input]
     max_value = functools.reduce(lambda a, b: max(a, b), first_col)
     max_value = max(MAX_VALUE_LIMIT, max_value)
     max_scale = math.pow(10, math.ceil(math.log10(max_value)))
@@ -51,16 +51,21 @@ def get_simple_data(query=DEFAULT_QUERY, delay=DEFAULT_DELAY):
     # Get a single row of data from datadog
     # TODO: remove the api_key and app_key args -> they are useless, prototype makes no sense (env vars...)
     #       instead, introduce a time range (the 3600 below...
-    res = datadog.api.Metric.query(start=int(time.time()) - delay, end=int(time.time()),
-                                   query=query)
+    try:
+        res = datadog.api.Metric.query(start=int(time.time()) - delay, end=int(time.time()),
+                                       query=query)
+    except Exception as e:
+        print("error fetching data", e)
+        return []
+
     pointlist = []
     try:
         pointlist = res['series'][0]['pointlist']
     except:
         raise "bad data %s" % res
 
-    print(pointlist)
-    print(simple_normalize(pointlist))
     return simple_normalize(pointlist)
 
-    True  # TODO !
+
+def get_demo_data():
+    return [max(0.0, math.sin((i + time.time()) / 5)) for i in range(100)]
