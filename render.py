@@ -62,10 +62,25 @@ def draw_status_check(mc, pos, size, status):
                     block.WOOL.id, 0)  # Blank message
 
 
-def draw_flat_wall_xy(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), border=True, data=[]):
+# TODO: write unit test for this, this could become a nigthmare...
+_transfos = {"xy": [lambda p: p, lambda p: p],
+             "yz": [lambda p: (p[1], p[2], p[0]), lambda p: (p[2], p[0], p[1])],
+             "zy": [lambda p: (p[2], p[1], p[0]), lambda p: (p[2], p[1], p[0])],
+             "xz": [lambda p: (p[0], p[2], p[1]), lambda p: (p[0], p[2], p[1])],
+             "yx": [lambda p: (p[1], p[0], p[2]), lambda p: (p[1], p[0], p[2])],
+             "zx": [lambda p: (p[2], p[0], p[1]), lambda p: (p[1], p[2], p[0])],
+             }
+
+
+def draw_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", border=True, data=[]):
     """Render a single line of data as a wall"""
-    x1, y1, z1 = pos1
-    x2, y2, z2 = pos2
+
+    abctoxyz, xyztoabc = _transfos[layout]
+    if not abctoxyz or not xyztoabc:
+        raise "invalid layout"
+
+    x1, y1, z1 = abctoxyz(pos1)
+    x2, y2, z2 = abctoxyz(pos2)
 
     if x1 == x2:
         return  # too thin
@@ -84,15 +99,17 @@ def draw_flat_wall_xy(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), border=True, da
         rclean = range(v, y2) if (y1 < y2) else range(y2 + 1, v + 1)
         # Display filled
         for y in rfilled:
+            a, b, c = xyztoabc((x, y, z))
             if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
                 # Display border
-                mc.setBlock(x, y, z, BORDER)
+                mc.setBlock(a, b, c, BORDER)
             else:
-                mc.setBlock(x, y, z, FILLED)
+                mc.setBlock(a, b, c, FILLED)
         # Clean the top
         for y in rclean:
+            a, b, c = xyztoabc((x, y, z))
             if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
                 # Display border
-                mc.setBlock(x, y, z, BORDER)
+                mc.setBlock(a, b, c, BORDER)
             else:
-                mc.setBlock(x, y, z, 0)
+                mc.setBlock(a, b, c, 0)

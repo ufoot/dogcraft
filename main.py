@@ -6,7 +6,8 @@ import render
 import fetch
 from dashboard import Dashboard
 import math
-import time, sys
+import time
+import sys
 
 # mc=minecraft.Minecraft.create()
 # mc.postToChat("hello world")
@@ -28,5 +29,7 @@ if __name__ == '__main__':
         # TODO: get rid of this once dashboards work
         points = fetch.get_demo_data()
         # print(points)
-        render.draw_flat_wall_xy(
-            mc=mc, pos1=(-30, 30, 75), pos2=(20, 45, 75), border=True, data=points)
+        render.draw_flat_wall(
+            mc=mc, pos1=(-30, 30, 75), pos2=(20, 45, 75), layout="xy", border=True, data=points)
+        render.draw_flat_wall(
+            mc=mc, pos1=(-30, 30, 90), pos2=(20, 30, 75), layout="xz", border=True, data=points)

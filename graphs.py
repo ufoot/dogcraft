@@ -1,5 +1,6 @@
 from fetch import get_simple_data
 
+
 class AbstractGraph(object):
 
     def __init__(self, graph_conf, mc):
@@ -14,6 +15,7 @@ class AbstractGraph(object):
     def get_data(self):
         return get_simple_data(self.query)
 
+
 class Wall(AbstractGraph):
 
     def update(self):
@@ -21,12 +23,14 @@ class Wall(AbstractGraph):
         self.mc.postToChat("Updating wall")
         pass
 
+
 class Mountain(AbstractGraph):
 
     def update(self):
         data = self.get_data()
         self.mc.postToChat("Updating montain")
         pass
+
 
 class StatusCheck(AbstractGraph):
 
