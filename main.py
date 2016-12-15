@@ -22,25 +22,11 @@ if __name__ == '__main__':
 
     # Run the update every n seconds
     while True:
-        time.sleep(3)
+        time.sleep(0.5)
         for dashboard in dashboards:
             dashboard.update()
-
-    render.draw_simple_wall(mc, (2, 2, 2), (0, 100), fetch.get_simple_data(
-        query='sum:kafka.consumer_lag{consumer_group:smelter}', delay=300))
-
-    def function(x):
-        return math.sin(x*6)**2
-    points = [function(x) for x in range(30)]
-    i = 30
-    render.draw_status_check(mc, (-30, 47, 80), 1, render.STATUS_ERROR)
-    render.draw_status_check(mc, (-22, 47, 80), 1, render.STATUS_OK)
-    render.draw_status_check(mc, (-14, 47, 80), 1, render.STATUS_WARNING)
-
-
-    while True:
-        i += 1
-        time.sleep(1)
-        points = points[1:]
-        points.append(function(i))
-        render.draw_simple_wall(mc, (-30, 47, 70), (50, 15), points)
+        # TODO: get rid of this once dashboards work
+        points = fetch.get_demo_data()
+        # print(points)
+        render.draw_flat_wall_xy(
+            mc=mc, pos1=(-30, 30, 75), pos2=(20, 45, 75), border=True, data=points)

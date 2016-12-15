@@ -16,9 +16,14 @@ WOOL_GREEN_DATA = 13
 WOOL_RED_DATA = 14
 WOOL_ORANGE_DATA = 1
 
-ok_message = [(0,0), (0, 1), (0, 2), (0, 3), (1,3), (2, 3), (2, 2), (2,1), (2, 0), (1, 0)]
+FILLED = block.STONE.id
+BORDER = block.SANDSTONE.id
+
+ok_message = [(0, 0), (0, 1), (0, 2), (0, 3), (1, 3),
+              (2, 3), (2, 2), (2, 1), (2, 0), (1, 0)]
 error_message = [(0, 0), (1, 1), (1, 2), (0, 3), (2, 3), (2, 0), (2, 0)]
-warning_message = [(-1, 1),(-1, 2), (0, 0), (1, 1), (2, 0), (3, 1), (3, 2)]
+warning_message = [(-1, 1), (-1, 2), (0, 0), (1, 1), (2, 0), (3, 1), (3, 2)]
+
 
 def draw_simple_wall(mc, pos, size, data):
     """Render a single line of data as a wall"""
@@ -26,9 +31,9 @@ def draw_simple_wall(mc, pos, size, data):
     w, h = size
     for i, value in enumerate(data):
         blocks_to_display = floor(h * value)
-        # Display dirt
+        # Display filled
         for j in range(blocks_to_display):
-            mc.setBlock(x + i, y + j, z, block.STONE.id)
+            mc.setBlock(x + i, y + j, z, FILLED)
         # Clean the top
         for k in range(blocks_to_display, h):
             mc.setBlock(x + i, y + k, z, 0)
@@ -53,4 +58,41 @@ def draw_status_check(mc, pos, size, status):
             mc.setBlock(x + x_i, y + y_i, z, block.WOOL.id, block_data)
 
     for (x_i, y_i) in message:
-        mc.setBlock(x + 2 + x_i, y + 1 +  y_i, z, block.WOOL.id, 0) # Blank message
+        mc.setBlock(x + 2 + x_i, y + 1 + y_i, z,
+                    block.WOOL.id, 0)  # Blank message
+
+
+def draw_flat_wall_xy(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), border=True, data=[]):
+    """Render a single line of data as a wall"""
+    x1, y1, z1 = pos1
+    x2, y2, z2 = pos2
+
+    if x1 == x2:
+        return  # too thin
+    if y1 == y2:
+        return  # too thin
+    if len(data) == 0:
+        return  # no data
+    z = (z1 + z2) / 2
+
+    r = range(x1, x2) if (x1 < x2) else range(x2 + 1, x1 + 1)
+
+    for x in r:
+        i = int(floor((float(x - x1) / float(x2 - x1)) * len(data)))
+        v = int(floor(data[i] * y2 + (1.0 - data[i]) * y1))
+        rfilled = range(y1, v) if (y1 < y2) else range(v + 1, y1 + 1)
+        rclean = range(v, y2) if (y1 < y2) else range(y2 + 1, v + 1)
+        # Display filled
+        for y in rfilled:
+            if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
+                # Display border
+                mc.setBlock(x, y, z, BORDER)
+            else:
+                mc.setBlock(x, y, z, FILLED)
+        # Clean the top
+        for y in rclean:
+            if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
+                # Display border
+                mc.setBlock(x, y, z, BORDER)
+            else:
+                mc.setBlock(x, y, z, 0)
