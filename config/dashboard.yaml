@@ -1,0 +1,23 @@
+- graph1:
+  type: wall
+  query: "avg:system.cpu.idle{*}"
+  pos1:
+    x: 10
+    y: 40
+    z: 50
+  pos2:
+    x: 10
+    y: 40
+    z: 50
+
+- graph2:
+  type: mountain
+  query: ""
+  pos1:
+    x: 10
+    y: 40
+    z: 50
+  pos2:
+    x: 10
+    y: 40
+    z: 50
