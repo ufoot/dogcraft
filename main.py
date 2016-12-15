@@ -17,7 +17,11 @@ if __name__ == '__main__':
         return math.sin(x*6)**2
     points = [function(x) for x in range(30)]
     i = 30
-    render.draw_status_check(mc, (-30, 47, 80), 1, render.STATUS_OK)
+    render.draw_status_check(mc, (-30, 47, 80), 1, render.STATUS_ERROR)
+    render.draw_status_check(mc, (-22, 47, 80), 1, render.STATUS_OK)
+    render.draw_status_check(mc, (-14, 47, 80), 1, render.STATUS_WARNING)
+
+
     while True:
         i += 1
         time.sleep(1)

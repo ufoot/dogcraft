@@ -1,6 +1,13 @@
 from math import floor
 import mcpi.block as block
 
+
+"""
+TODOS
+- draw a line around graph ?
+- draw a whole dashboard with several graphs
+- draw only values that change
+"""
 STATUS_OK = "ok"
 STATUS_WARNING = "warning"
 STATUS_ERROR = "error"
@@ -10,7 +17,8 @@ WOOL_RED_DATA = 14
 WOOL_ORANGE_DATA = 1
 
 ok_message = [(0,0), (0, 1), (0, 2), (0, 3), (1,3), (2, 3), (2, 2), (2,1), (2, 0), (1, 0)]
-
+error_message = [(0, 0), (1, 1), (1, 2), (0, 3), (2, 3), (2, 0), (2, 0)]
+warning_message = [(-1, 1),(-1, 2), (0, 0), (1, 1), (2, 0), (3, 1), (3, 2)]
 
 def draw_simple_wall(mc, pos, size, data):
     """Render a single line of data as a wall"""
@@ -35,10 +43,10 @@ def draw_status_check(mc, pos, size, status):
         message = ok_message
     elif status == STATUS_ERROR:
         block_data = WOOL_RED_DATA
-        # TODO error message
+        message = error_message
     elif status == STATUS_WARNING:
         block_data = WOOL_ORANGE_DATA
-        # TODO warning message
+        message = warning_message
 
     for x_i in range(7):
         for y_i in range(6):
