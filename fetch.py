@@ -61,5 +61,6 @@ def get_simple_data(query=DEFAULT_QUERY, delay=DEFAULT_DELAY):
 
     print(pointlist)
     print(simple_normalize(pointlist))
+    return simple_normalize(pointlist)
 
     True  # TODO !
