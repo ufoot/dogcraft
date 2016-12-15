@@ -36,7 +36,7 @@ MAX_VALUE_LIMIT = 0.000000001
 
 
 def simple_normalize(input):
-    first_col = [x[0] for x in input]
+    first_col = [float(x[1]) for x in input]
     max_value = functools.reduce(lambda a, b: max(a, b), first_col)
     max_value = max(MAX_VALUE_LIMIT, max_value)
     max_scale = math.pow(10, math.ceil(math.log10(max_value)))
@@ -59,6 +59,7 @@ def get_simple_data(query=DEFAULT_QUERY, delay=DEFAULT_DELAY):
     except:
         raise "bad data %s" % res
 
+    print(pointlist)
     print(simple_normalize(pointlist))
 
     True  # TODO !
