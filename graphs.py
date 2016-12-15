@@ -1,3 +1,4 @@
+from fetch import get_simple_data
 
 class AbstractGraph(object):
 
@@ -10,21 +11,27 @@ class AbstractGraph(object):
     def update(self):
         raise Exception("Not implemented")
 
+    def get_data(self):
+        return get_simple_data(self.query)
+
 class Wall(AbstractGraph):
 
     def update(self):
+        data = self.get_data()
         self.mc.postToChat("Updating wall")
         pass
 
 class Mountain(AbstractGraph):
 
     def update(self):
+        data = self.get_data()
         self.mc.postToChat("Updating montain")
         pass
 
 class StatusCheck(AbstractGraph):
 
     def update(self):
+        data = self.get_data()
         # TODO Call the display function
         pass
 
