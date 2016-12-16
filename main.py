@@ -8,6 +8,7 @@ from dashboard import Dashboard
 import math
 import time
 import sys
+from cleanup import set_cleanup_callback
 
 # mc=minecraft.Minecraft.create()
 # mc.postToChat("hello world")
@@ -19,8 +20,10 @@ if __name__ == '__main__':
 
     # Load dashboards
     for arg in sys.argv[1:]:
-        print(arg)
         dashboards.append(Dashboard(arg, mc))
+
+    set_cleanup_callback(lambda: [dashboard.cleanup()
+                                  for dashboard in dashboards])
 
     # Run the update every n seconds
     while True:

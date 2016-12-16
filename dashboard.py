@@ -17,5 +17,9 @@ class Dashboard(object):
         for graph in self.graphs:
             graph.update()
 
+    def cleanup(self):
+        for graph in self.graphs:
+            graph.cleanup()
+
 if __name__ == '__main__':
     d = Dashboard("config/dashboard.yaml")
