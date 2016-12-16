@@ -1,5 +1,5 @@
 import os
-from fetch import get_simple_data, get_demo_data
+from fetch import get_simple_data, get_demo_data, DEFAULT_DELAY
 from render import draw_flat_wall, erase_flat_wall, WOOL, WOOL_RED_DATA, DEFAULT_TITLE
 import fetch
 import render
@@ -18,6 +18,8 @@ class AbstractGraph(object):
         self.layout = graph_conf['layout'] if 'layout' in graph_conf else "xy"
         self.title = graph_conf[
             'title'] if 'title' in graph_conf else DEFAULT_TITLE
+        self.delay = graph_conf[
+            'delay'] if 'delay' in graph_conf else DEFAULT_DELAY
         self.border = graph_conf['border'] if 'border' in graph_conf else False
         self.mc = mc
 
@@ -30,7 +32,7 @@ class AbstractGraph(object):
     def get_data(self):
         if os.environ.get('DATADOG_DEMO_DATA'):
             return get_demo_data()
-        return get_simple_data(self.query)
+        return get_simple_data(query=self.query, delay=self.delay)
 
 
 class Wall(AbstractGraph):

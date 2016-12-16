@@ -1,7 +1,8 @@
 - graph1:
   title: "Loom"
+  delay: 3600
   type: wall
-  query: "avg:kafka.consumer_lag{consumer_group:loom}"
+  query: "sum:kafka.consumer_lag{consumer_group:loom}"
   pos1:
     x: 245
     y: 20
@@ -15,6 +16,7 @@
 
 - graph2:
   title: "Trace"
+  delay: 300
   type: wall
   query: "avg:kafka.consumer_lag{consumer_group:trace-writer}"
   pos1:
@@ -30,6 +32,7 @@
 
 - graph3:
   title: "Resource"
+  delay: 300
   type: wall
   query: "avg:kafka.consumer_lag{consumer_group:resource-writer}"
   pos1:
@@ -45,8 +48,9 @@
 
 - graph4:
   title: "Destro"
+  delay: 3600
   type: wall
-  query: "avg:kafka.consumer_lag{consumer_group:destro}"
+  query: "sum:kafka.consumer_lag{consumer_group:destro}"
   pos1:
     x: 245
     y: 20
