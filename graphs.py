@@ -1,3 +1,4 @@
+import os
 from fetch import get_simple_data, get_demo_data
 from render import draw_flat_wall, erase_flat_wall
 
@@ -21,8 +22,9 @@ class AbstractGraph(object):
         raise Exception("Not implemented")
 
     def get_data(self):
-        # return get_simple_data(self.query)
-        return get_demo_data()
+        if os.environ.get('DATADOG_DEMO_DATA'):
+            return get_demo_data()
+        return get_simple_data(self.query)
 
 
 class Wall(AbstractGraph):

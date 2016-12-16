@@ -35,8 +35,15 @@ def initialize():
 MAX_VALUE_LIMIT = 0.000000001
 
 
+def _float(v):
+    try:
+        return max(float(v), 0.0)
+    except:
+        return 0.0
+
+
 def simple_normalize(input):
-    first_col = [float(max(x[1], 0.0)) for x in input]
+    first_col = [_float(x[1]) for x in input]
     max_value = functools.reduce(lambda a, b: max(a, b), first_col)
     max_value = max(MAX_VALUE_LIMIT, max_value)
     max_scale = math.pow(10, math.ceil(math.log10(max_value)))
