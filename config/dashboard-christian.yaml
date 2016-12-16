@@ -1,5 +1,5 @@
 - graph1:
-  title: "Loom - AVG"
+  title: "Loom"
   type: wall
   query: "avg:kafka.consumer_lag{consumer_group:loom}"
   pos1:
@@ -14,9 +14,9 @@
   border: true
 
 - graph2:
-  title: "Loom - MIN"
+  title: "Trace"
   type: wall
-  query: "min:kafka.consumer_lag{consumer_group:loom}"
+  query: "avg:kafka.consumer_lag{consumer_group:trace-writer}"
   pos1:
     x: 150
     y: 20
@@ -29,9 +29,9 @@
   border: true
 
 - graph3:
-  title: "Loom - MAX"
+  title: "Resource"
   type: wall
-  query: "max:kafka.consumer_lag{consumer_group:loom}"
+  query: "avg:kafka.consumer_lag{consumer_group:resource-writer}"
   pos1:
     x: 250
     y: 20
@@ -44,9 +44,9 @@
   border: true
 
 - graph4:
-  title: "Loom - SUM"
+  title: "Destro"
   type: wall
-  query: "sum:kafka.consumer_lag{consumer_group:loom}"
+  query: "avg:kafka.consumer_lag{consumer_group:destro}"
   pos1:
     x: 245
     y: 20

@@ -33,4 +33,4 @@ if __name__ == '__main__':
               (len(dashboards), mc.player.getTilePos()))
         for dashboard in dashboards:
             dashboard.update()
-        time.sleep(3)
+        time.sleep(5)

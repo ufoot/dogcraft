@@ -130,9 +130,9 @@ def draw_flat_wall(
         for y in rfilled:
             in_text = False
             dx = abs(x - x1) - TEXT_OFFSET
-            dy = abs(y - y1) - TEXT_OFFSET
+            dy = abs(y - y2) - TEXT_OFFSET
             if dx >= 0 and dy >= 0 and dx < len(text_bitmap) and dy < len(text_bitmap[dx]):
-                in_text = text_bitmap[dx][dy]
+                in_text = text_bitmap[dx][len(text_bitmap[dx]) - dy - 1]
             a, b, c = xyztoabc((x, y, z))
             if (border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1)) or in_text:
                 # Display border
@@ -143,9 +143,9 @@ def draw_flat_wall(
         for y in rclean:
             in_text = False
             dx = abs(x - x1) - TEXT_OFFSET
-            dy = abs(y - y1) - TEXT_OFFSET
+            dy = abs(y - y2) - TEXT_OFFSET
             if dx >= 0 and dy >= 0 and dx < len(text_bitmap) and dy < len(text_bitmap[dx]):
-                in_text = text_bitmap[dx][dy]
+                in_text = text_bitmap[dx][len(text_bitmap[dx]) - dy - 1]
             a, b, c = xyztoabc((x, y, z))
             if (border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1)) or in_text:
                 # Display border

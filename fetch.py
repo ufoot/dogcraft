@@ -51,7 +51,7 @@ def simple_normalize(input):
     return scaled
 
 DEFAULT_QUERY = 'avg:system.cpu.idle{*}'  # CPU is always available as a metric
-DEFAULT_DELAY = 300                      # 5 minutes
+DEFAULT_DELAY = 600                       # 10 minutes
 
 
 def get_simple_data(query=DEFAULT_QUERY, delay=DEFAULT_DELAY):
