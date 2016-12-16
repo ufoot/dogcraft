@@ -16,6 +16,5 @@ def signal_handler(signal, frame):
     if _cleanup_callback:
         print('Cleaning up...')
         _cleanup_callback()
-        time.sleep(0.5)
     print('Now exit.')
     sys.exit(0)

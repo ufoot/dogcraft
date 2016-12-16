@@ -9,12 +9,14 @@ import math
 import time
 import sys
 from cleanup import set_cleanup_callback
+from letter import initialize_font
 
 # mc=minecraft.Minecraft.create()
 # mc.postToChat("hello world")
 
 if __name__ == '__main__':
     fetch.initialize()
+    initialize_font()
     mc = minecraft.Minecraft.create("172.86.162.69")
     dashboards = []
 
@@ -27,17 +29,8 @@ if __name__ == '__main__':
 
     # Run the update every n seconds
     while True:
-        time.sleep(1)
-        print("drawing %d dashboard(s)" % len(dashboards))
+        print("drawing %d dashboard(s), your pos %s" %
+              (len(dashboards), mc.player.getTilePos()))
         for dashboard in dashboards:
             dashboard.update()
-        time.sleep(10)
-
-        # TODO: get rid of this once dashboards work
-        #points = fetch.get_demo_data()
-        # print(points)
-        # render.draw_flat_wall(
-        #    mc=mc, pos1=(-30, 30, 75), pos2=(20, 45, 75), layout="xy", border=True, data=points)
-        # render.draw_flat_wall(
-        # mc=mc, pos1=(-30, 30, 90), pos2=(20, 30, 75), layout="xz",
-        # border=True, data=points)
+        time.sleep(3)
