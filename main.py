@@ -24,9 +24,10 @@ if __name__ == '__main__':
 
     # Run the update every n seconds
     while True:
-        time.sleep(1)
         for dashboard in dashboards:
             dashboard.update()
+        time.sleep(10)
+
         # TODO: get rid of this once dashboards work
         #points = fetch.get_demo_data()
         # print(points)

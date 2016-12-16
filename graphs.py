@@ -1,6 +1,7 @@
 from fetch import get_simple_data, get_demo_data
-from render import draw_flat_wall
-
+from render import draw_flat_wall, WOOL, WOOL_RED_DATA
+import fetch
+import render
 
 class AbstractGraph(object):
 
@@ -47,8 +48,36 @@ class StatusCheck(AbstractGraph):
         pass
 
 
+class MonitorStatus(AbstractGraph):
+
+    def __init__(self, graph_conf, mc):
+        self.pos1 = (graph_conf['pos1']['x'], graph_conf[
+                     'pos1']['y'], graph_conf['pos1']['z'])
+        self.pos2 = (graph_conf['pos2']['x'], graph_conf[
+                     'pos2']['y'], graph_conf['pos2']['z'])
+
+        self.monitor_id = graph_conf['monitor_id']
+        self.layout = graph_conf['layout'] if 'layout' in graph_conf else "xy"
+        self.mc = mc
+
+
+    def update(self):
+        data = fetch.get_monitor_status(self.monitor_id)
+        if data == fetch.MONITOR_STATUS_OK:
+            block_color = render.COLORS['green']
+        elif data == fetch.MONITOR_STATUS_ALERT:
+            block_color = render.COLORS['red']
+        elif data == fetch.MONITOR_STATUS_WARN:
+            block_color = render.COLORS['orange']
+        elif data == fetch.MONITOR_STATUS_NO_DATA:
+            block_color = render.COLORS['grey']
+
+        draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2, layout=self.layout, border=False, data=[1.0], filled=WOOL, block_data=block_color)
+
+
 TYPES = {
     'wall': Wall,
     'mountain': Mountain,
     "status_check": StatusCheck,
+    "monitor_status": MonitorStatus,
 }

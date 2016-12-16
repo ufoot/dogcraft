@@ -67,6 +67,20 @@ def get_simple_data(query=DEFAULT_QUERY, delay=DEFAULT_DELAY):
 
     return simple_normalize(pointlist)
 
+MONITOR_STATUS_ALERT = 'Alert'
+MONITOR_STATUS_WARN = 'Warn'
+MONITOR_STATUS_OK = 'OK'
+MONITOR_STATUS_NO_DATA = 'No Data'
+
+def get_monitor_status(monitor_id):
+    try:
+        res = datadog.api.Monitor.get(monitor_id)
+        status = res['overall_state']
+        print(status)
+        return status # One of the three constants above
+    except:
+        return MONITOR_STATUS_NO_DATA
+
 
 def get_demo_data():
     return [max(0.0, math.sin((i + time.time()) / 5)) for i in range(100)]
