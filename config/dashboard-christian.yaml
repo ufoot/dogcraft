@@ -1,0 +1,27 @@
+- graph1:
+  type: wall
+  query: "avg:system.cpu.idle{*}"
+  pos1:
+    x: -50
+    y: 40
+    z: 50
+  pos2:
+    x: -10
+    y: 60
+    z: 50
+  layout: "xy"
+  border: true
+
+- graph2:
+  type: wall
+  query: "avg:system.cpu.idle{*}"
+  pos1:
+    x: -40
+    y: 40
+    z: 50
+  pos2:
+    x: -40
+    y: 60
+    z: 90
+  layout: "yz"
+  border: true

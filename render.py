@@ -76,8 +76,6 @@ def draw_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", borde
     """Render a single line of data as a wall"""
 
     abctoxyz, xyztoabc = _transfos[layout]
-    if not abctoxyz or not xyztoabc:
-        raise "invalid layout"
 
     x1, y1, z1 = abctoxyz(pos1)
     x2, y2, z2 = abctoxyz(pos2)
@@ -113,3 +111,26 @@ def draw_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", borde
                 mc.setBlock(a, b, c, BORDER)
             else:
                 mc.setBlock(a, b, c, 0)
+
+
+def erase_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", border=True, data=[]):
+    """Erases everything where a wall was"""
+
+    abctoxyz, xyztoabc = _transfos[layout]
+
+    x1, y1, z1 = abctoxyz(pos1)
+    x2, y2, z2 = abctoxyz(pos2)
+
+    if x1 == x2:
+        return  # too thin
+    if y1 == y2:
+        return  # too thin
+    z = (z1 + z2) / 2
+
+    r = range(x1, x2) if (x1 < x2) else range(x2 + 1, x1 + 1)
+    for x in r:
+        rsub = range(y1, y2) if (y1 < y2) else range(y2 + 1, y1 + 1)
+        # Clean
+        for y in rsub:
+            a, b, c = xyztoabc((x, y, z))
+            mc.setBlock(a, b, c, 0)
