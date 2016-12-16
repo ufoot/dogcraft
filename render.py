@@ -18,11 +18,21 @@ WOOL_ORANGE_DATA = 1
 
 # Colors for wool block
 COLORS = {
-    'red': 14,
-    'green': 13,
     'orange': 1,
+    'magenta': 2,
+    'light_blue': 3,
+    'yellow': 4,
+    'lime': 5,
+    'pink': 6,
     'grey': 7,
-    'light_grey': 8
+    'light_grey': 8,
+    'cyan': 9,
+    'purple': 10,
+    'blue': 11,
+    'brown': 12,
+    'green': 13,
+    'red': 14,
+    'black': 15
 }
 
 FILLED = block.STONE.id
