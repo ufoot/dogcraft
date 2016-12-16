@@ -28,6 +28,7 @@ if __name__ == '__main__':
     # Run the update every n seconds
     while True:
         time.sleep(1)
+        print("drawing %d dashboard(s)" % len(dashboards))
         for dashboard in dashboards:
             dashboard.update()
         # TODO: get rid of this once dashboards work
