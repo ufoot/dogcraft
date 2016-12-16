@@ -3,7 +3,7 @@ from render import draw_flat_wall, erase_flat_wall, WOOL, WOOL_RED_DATA
 import fetch
 import render
 import random
-
+import os
 class AbstractGraph(object):
 
     def __init__(self, graph_conf, mc):
