@@ -34,6 +34,9 @@ def initialize():
 # if we only have zeroes or two small values, at least, scale should be this
 MAX_VALUE_LIMIT = 0.000000001
 
+# with this, the higest value in the data set is at least 20% of the max
+AUTOSCALE_LOGBASE = 5
+
 
 def _float(v):
     try:
@@ -46,7 +49,8 @@ def simple_normalize(input):
     first_col = [_float(x[1]) for x in input]
     max_value = functools.reduce(lambda a, b: max(a, b), first_col)
     max_value = max(MAX_VALUE_LIMIT, max_value)
-    max_scale = math.pow(10, math.ceil(math.log10(max_value)))
+    max_scale = math.pow(AUTOSCALE_LOGBASE, math.ceil(
+        math.log(max_value, AUTOSCALE_LOGBASE)))
     scaled = [x / max_scale for x in first_col]
     return scaled
 
