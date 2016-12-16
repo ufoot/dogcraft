@@ -1,6 +1,6 @@
 import os
 from fetch import get_simple_data, get_demo_data
-from render import draw_flat_wall, erase_flat_wall, WOOL, WOOL_RED_DATA
+from render import draw_flat_wall, erase_flat_wall, WOOL, WOOL_RED_DATA, DEFAULT_TITLE
 import fetch
 import render
 import random
@@ -16,6 +16,8 @@ class AbstractGraph(object):
                      'pos2']['y'], graph_conf['pos2']['z'])
         self.query = graph_conf['query']
         self.layout = graph_conf['layout'] if 'layout' in graph_conf else "xy"
+        self.title = graph_conf[
+            'title'] if 'title' in graph_conf else DEFAULT_TITLE
         self.border = graph_conf['border'] if 'border' in graph_conf else False
         self.mc = mc
 
@@ -36,7 +38,8 @@ class Wall(AbstractGraph):
     def update(self):
         data = self.get_data()
         draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2,
-                       layout=self.layout, border=self.border, data=data,
+                       layout=self.layout, title=self.title,
+                       border=self.border, data=data,
                        filled_data=render.COLORS['light_blue'],
                        border_data=render.COLORS['yellow'])
         pass

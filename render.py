@@ -1,6 +1,6 @@
 from math import floor
 import mcpi.block as block
-
+from letter import get_text
 
 """
 TODOS
@@ -38,6 +38,8 @@ COLORS = {
 
 FILLED = block.STONE.id
 BORDER = block.SANDSTONE.id
+DEFAULT_TITLE = 'ddg'
+TEXT_OFFSET = 2
 
 ok_message = [(0, 0), (0, 1), (0, 2), (0, 3), (1, 3),
               (2, 3), (2, 2), (2, 1), (2, 0), (1, 0)]
@@ -94,7 +96,8 @@ _transfos = {"xy": [lambda p: p, lambda p: p],
 
 def draw_flat_wall(
         mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0),
-        layout="xy", border=True, data=[],
+        layout="xy", title=DEFAULT_TITLE, border=True,
+        data=[],
         filled=WOOL, filled_data=COLORS['light_blue'],
         background_block=WOOL, background_data=COLORS['white'],
         border_block=WOOL, border_data=COLORS['light_grey']):
@@ -120,18 +123,31 @@ def draw_flat_wall(
         v = int(floor(data[i] * y2 + (1.0 - data[i]) * y1))
         rfilled = range(y1, v) if (y1 < y2) else range(v + 1, y1 + 1)
         rclean = range(v, y2) if (y1 < y2) else range(y2 + 1, v + 1)
+        text_bitmap = []
+        if title:
+            text_bitmap = get_text(title)
         # Display filled
         for y in rfilled:
+            in_text = False
+            dx = abs(x - x1) - TEXT_OFFSET
+            dy = abs(y - y1) - TEXT_OFFSET
+            if dx >= 0 and dy >= 0 and dx < len(text_bitmap) and dy < len(text_bitmap[dx]):
+                in_text = text_bitmap[dx][dy]
             a, b, c = xyztoabc((x, y, z))
-            if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
+            if (border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1)) or in_text:
                 # Display border
                 mc.setBlock(a, b, c, border_block, border_data)
             else:
                 mc.setBlock(a, b, c, filled, filled_data)
         # Clean the top
         for y in rclean:
+            in_text = False
+            dx = abs(x - x1) - TEXT_OFFSET
+            dy = abs(y - y1) - TEXT_OFFSET
+            if dx >= 0 and dy >= 0 and dx < len(text_bitmap) and dy < len(text_bitmap[dx]):
+                in_text = text_bitmap[dx][dy]
             a, b, c = xyztoabc((x, y, z))
-            if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
+            if (border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1)) or in_text:
                 # Display border
                 mc.setBlock(a, b, c, border_block, border_data)
             else:

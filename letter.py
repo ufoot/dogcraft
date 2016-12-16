@@ -7,12 +7,13 @@ _text_cache = {}
 
 FONT_FILE = "data/FreeSansBold.ttf"
 COLUMN_SPACE = 1
+CHAR_SIZE = 666
 
 
 def initialize_font():
     global _face
     _face = freetype.Face(FONT_FILE)
-    _face.set_char_size(1000)
+    _face.set_char_size(CHAR_SIZE)
 
 
 def get_char(c):
@@ -32,7 +33,7 @@ def get_char(c):
     for i in range(w):
         ret.append([])
         for j in range(h):
-            ret[i].append(bitmap.buffer[i * h + j] >= 127)
+            ret[i].append(bitmap.buffer[(h - j - 1) * w + i] >= 127)
     _char_cache[c] = ret
     return ret
 
