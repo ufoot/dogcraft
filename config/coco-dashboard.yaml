@@ -1,0 +1,51 @@
+- graph1:
+  type: wall
+  query: "avg:trace.dogweb.base.before.duration{*} + avg:cassandra.db.recent_read_latency_micros{*} + avg:cassandra.db.recent_write_latency_micros{*} + avg:redis.info.latency_ms{*} + avg:gunicorn.request.duration.avg{*}"
+  pos1:
+    x: 50
+    y: 40
+    z: 170
+  pos2:
+    x: 80
+    y: 61
+    z: 170
+  layout: "xy"
+  border: true
+
+- graph2:
+  type: wall
+  query: "avg:system.cpu.idle{*}"
+  pos1:
+    x: 81
+    y: 40
+    z: 170
+  pos2:
+    x: 92
+    y: 55
+    z: 170
+  layout: "xy"
+  border: true
+
+- monitor_status:
+  type: monitor_status
+  monitor_id: 660012
+  pos1:
+    x: 81
+    y: 56
+    z: 170
+  pos2:
+    x: 86
+    y: 61
+    z: 170
+
+- monitor_status:
+  type: monitor_status
+  monitor_id: 839735
+  pos1:
+    x: 87
+    y: 56
+    z: 170
+  pos2:
+    x: 92
+    y: 61
+    z: 170

@@ -31,6 +31,8 @@ if __name__ == '__main__':
         print("drawing %d dashboard(s)" % len(dashboards))
         for dashboard in dashboards:
             dashboard.update()
+        time.sleep(10)
+
         # TODO: get rid of this once dashboards work
         #points = fetch.get_demo_data()
         # print(points)

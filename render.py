@@ -11,10 +11,19 @@ TODOS
 STATUS_OK = "ok"
 STATUS_WARNING = "warning"
 STATUS_ERROR = "error"
-
+WOOL = block.WOOL.id
 WOOL_GREEN_DATA = 13
 WOOL_RED_DATA = 14
 WOOL_ORANGE_DATA = 1
+
+# Colors for wool block
+COLORS = {
+    'red': 14,
+    'green': 13,
+    'orange': 1,
+    'grey': 7,
+    'light_grey': 8
+}
 
 FILLED = block.STONE.id
 BORDER = block.SANDSTONE.id
@@ -72,7 +81,7 @@ _transfos = {"xy": [lambda p: p, lambda p: p],
              }
 
 
-def draw_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", border=True, data=[]):
+def draw_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", border=True, data=[], filled=FILLED, block_data=0, background_block=0, border_block=BORDER):
     """Render a single line of data as a wall"""
 
     abctoxyz, xyztoabc = _transfos[layout]
@@ -100,17 +109,17 @@ def draw_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", borde
             a, b, c = xyztoabc((x, y, z))
             if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
                 # Display border
-                mc.setBlock(a, b, c, BORDER)
+                mc.setBlock(a, b, c, border_block)
             else:
-                mc.setBlock(a, b, c, FILLED)
+                mc.setBlock(a, b, c, filled, block_data)
         # Clean the top
         for y in rclean:
             a, b, c = xyztoabc((x, y, z))
             if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
                 # Display border
-                mc.setBlock(a, b, c, BORDER)
+                mc.setBlock(a, b, c, border_block)
             else:
-                mc.setBlock(a, b, c, 0)
+                mc.setBlock(a, b, c, background_block)
 
 
 def erase_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", border=True, data=[]):
