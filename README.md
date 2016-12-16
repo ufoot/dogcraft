@@ -54,6 +54,10 @@ Some environnment vars matter:
 - `DATADOG_API_HOST`: the API host (eg: https://app.datadoghq.com/ )
 - `DATADOG_DEMO_DATA`: if set to `True`, the program won't query DataDog API and display random demo data instead instead of read-world data
 
+## Enjoy
+
+![A typical screen capture](media/capture.jpg?raw=true "DogCraft screen capture")
+
 # TODO
 
 ...
