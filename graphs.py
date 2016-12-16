@@ -1,5 +1,5 @@
 from fetch import get_simple_data, get_demo_data
-from render import draw_flat_wall
+from render import draw_flat_wall, erase_flat_wall
 
 
 class AbstractGraph(object):
@@ -17,6 +17,9 @@ class AbstractGraph(object):
     def update(self):
         raise Exception("Not implemented")
 
+    def cleanup(self):
+        raise Exception("Not implemented")
+
     def get_data(self):
         # return get_simple_data(self.query)
         return get_demo_data()
@@ -30,6 +33,11 @@ class Wall(AbstractGraph):
                        layout=self.layout, border=self.border, data=data)
         pass
 
+    def cleanup(self):
+        erase_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2,
+                        layout=self.layout)
+        pass
+
 
 class Mountain(AbstractGraph):
 
@@ -38,12 +46,18 @@ class Mountain(AbstractGraph):
         self.mc.postToChat("Updating montain")
         pass
 
+    def cleanup(self):
+        pass
+
 
 class StatusCheck(AbstractGraph):
 
     def update(self):
         data = self.get_data()
         # TODO Call the display function
+        pass
+
+    def cleanup(self):
         pass
 
 
