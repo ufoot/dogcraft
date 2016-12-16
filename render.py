@@ -18,6 +18,7 @@ WOOL_ORANGE_DATA = 1
 
 # Colors for wool block
 COLORS = {
+    'white': 0,
     'orange': 1,
     'magenta': 2,
     'light_blue': 3,
@@ -91,7 +92,12 @@ _transfos = {"xy": [lambda p: p, lambda p: p],
              }
 
 
-def draw_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", border=True, data=[], filled=FILLED, block_data=0, background_block=0, border_block=BORDER):
+def draw_flat_wall(
+        mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0),
+        layout="xy", border=True, data=[],
+        filled=WOOL, filled_data=COLORS['light_blue'],
+        background_block=WOOL, background_data=COLORS['white'],
+        border_block=WOOL, border_data=COLORS['light_grey']):
     """Render a single line of data as a wall"""
 
     abctoxyz, xyztoabc = _transfos[layout]
@@ -119,17 +125,17 @@ def draw_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", borde
             a, b, c = xyztoabc((x, y, z))
             if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
                 # Display border
-                mc.setBlock(a, b, c, border_block)
+                mc.setBlock(a, b, c, border_block, border_data)
             else:
-                mc.setBlock(a, b, c, filled, block_data)
+                mc.setBlock(a, b, c, filled, filled_data)
         # Clean the top
         for y in rclean:
             a, b, c = xyztoabc((x, y, z))
             if border and (x == x1 or abs(x2 - x) <= 1 or y == y1 or abs(y2 - y) <= 1):
                 # Display border
-                mc.setBlock(a, b, c, border_block)
+                mc.setBlock(a, b, c, border_block, border_data)
             else:
-                mc.setBlock(a, b, c, background_block)
+                mc.setBlock(a, b, c, background_block, background_data)
 
 
 def erase_flat_wall(mc=None, pos1=(0, 0, 0), pos2=(10, 10, 0), layout="xy", border=True, data=[]):

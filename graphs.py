@@ -14,7 +14,7 @@ class AbstractGraph(object):
                      'pos2']['y'], graph_conf['pos2']['z'])
         self.query = graph_conf['query']
         self.layout = graph_conf['layout'] if 'layout' in graph_conf else "xy"
-        self.border = graph_conf['border'] if 'border' in graph_conf else false
+        self.border = graph_conf['border'] if 'border' in graph_conf else False
         self.mc = mc
 
     def update(self):
@@ -34,7 +34,9 @@ class Wall(AbstractGraph):
     def update(self):
         data = self.get_data()
         draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2,
-                       layout=self.layout, border=self.border, data=data)
+                       layout=self.layout, border=self.border, data=data,
+                       filled_data=render.COLORS['light_blue'],
+                       border_data=render.COLORS['yellow'])
         pass
 
     def cleanup(self):
@@ -94,7 +96,8 @@ class MonitorStatus(AbstractGraph):
         elif data == fetch.MONITOR_STATUS_NO_DATA:
             block_color = render.COLORS['grey']
 
-        draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2, layout=self.layout, border=False, data=[1.0], filled=WOOL, block_data=block_color)
+        draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2, layout=self.layout, border=False, data=[1.0],
+                       filled_data=block_color)
 
     def cleanup(self):
         erase_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2,
