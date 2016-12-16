@@ -83,6 +83,7 @@ class MonitorStatus(AbstractGraph):
         self.monitor_id = graph_conf['monitor_id']
         self.layout = graph_conf['layout'] if 'layout' in graph_conf else "xy"
         self.mc = mc
+        self.blink = False
 
     def update(self):
         if os.environ.get('DATADOG_DEMO_DATA'):
@@ -94,7 +95,12 @@ class MonitorStatus(AbstractGraph):
         if data == fetch.MONITOR_STATUS_OK:
             block_color = render.COLORS['green']
         elif data == fetch.MONITOR_STATUS_ALERT:
-            block_color = render.COLORS['red']
+            # blink on alert, to catch your eye
+            if self.blink:
+                block_color = render.COLORS['black']
+            else:
+                block_color = render.COLORS['red']
+            self.blink = not self.blink
         elif data == fetch.MONITOR_STATUS_WARN:
             block_color = render.COLORS['orange']
         elif data == fetch.MONITOR_STATUS_NO_DATA:

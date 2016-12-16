@@ -48,11 +48,11 @@
   type: wall
   query: "sum:kafka.consumer_lag{consumer_group:loom}"
   pos1:
-    x: 155
+    x: 245
     y: 20
     z: 35
   pos2:
-    x: 245
+    x: 155
     y: 20
     z: 95
   layout: "xz"
