@@ -16,8 +16,8 @@ class RenderCache(object):
 
     def setBlock(self, x, y, z, block, data={}):
         self.query += 1
-        if not self.query % 10000:
-            print("cache hit=%d miss=%d", self.hit, self.miss)
+        if not self.query % 100000:
+            print("cache hit=%d miss=%d" % (self.hit, self.miss))
         key = _cache_key(x, y, z)
         if key in self._cache and self._cache[key] == (block, data):
             self.hit += 1
