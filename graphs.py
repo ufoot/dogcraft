@@ -96,6 +96,10 @@ class MonitorStatus(AbstractGraph):
 
         draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2, layout=self.layout, border=False, data=[1.0], filled=WOOL, block_data=block_color)
 
+    def cleanup(self):
+        erase_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2,
+                        layout=self.layout)
+
 
 TYPES = {
     'wall': Wall,
