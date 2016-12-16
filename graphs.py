@@ -2,6 +2,7 @@ from fetch import get_simple_data, get_demo_data
 from render import draw_flat_wall, WOOL, WOOL_RED_DATA
 import fetch
 import render
+import random
 
 class AbstractGraph(object):
 
@@ -62,7 +63,12 @@ class MonitorStatus(AbstractGraph):
 
 
     def update(self):
-        data = fetch.get_monitor_status(self.monitor_id)
+        if os.environ.get('DATADOG_DEMO_DATA'):
+            data = random.choice([fetch.MONITOR_STATUS_OK,
+                fetch.MONITOR_STATUS_WARN, fetch.MONITOR_STATUS_ALERT])
+        else:
+            data = fetch.get_monitor_status(self.monitor_id)
+            
         if data == fetch.MONITOR_STATUS_OK:
             block_color = render.COLORS['green']
         elif data == fetch.MONITOR_STATUS_ALERT:
