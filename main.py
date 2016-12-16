@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     # Run the update every n seconds
     while True:
-        print("drawing %d dashboard(s), your pos %s" %
+        print("drawing %d dashboard(s), pos: %s" %
               (len(dashboards), mc.player.getTilePos()))
         for dashboard in dashboards:
             dashboard.update()
