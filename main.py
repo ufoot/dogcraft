@@ -27,17 +27,7 @@ if __name__ == '__main__':
 
     # Run the update every n seconds
     while True:
-        time.sleep(1)
         print("drawing %d dashboard(s)" % len(dashboards))
         for dashboard in dashboards:
             dashboard.update()
-        time.sleep(10)
-
-        # TODO: get rid of this once dashboards work
-        #points = fetch.get_demo_data()
-        # print(points)
-        # render.draw_flat_wall(
-        #    mc=mc, pos1=(-30, 30, 75), pos2=(20, 45, 75), layout="xy", border=True, data=points)
-        # render.draw_flat_wall(
-        # mc=mc, pos1=(-30, 30, 90), pos2=(20, 30, 75), layout="xz",
-        # border=True, data=points)
+        time.sleep(1)
