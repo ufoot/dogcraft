@@ -31,7 +31,7 @@
   border: true
 
 - graph3:
-  title: "Resource"
+  title: "Res."
   delay: 300
   type: wall
   query: "avg:kafka.consumer_lag{consumer_group:resource-writer}"

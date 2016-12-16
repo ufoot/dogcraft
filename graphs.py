@@ -6,6 +6,9 @@ import render
 import random
 import os
 
+DEFAULT_FILLED_COLOR = 'light_blue'
+DEFAULT_BORDER_COLOR = 'yellow'
+
 
 class AbstractGraph(object):
 
@@ -21,6 +24,10 @@ class AbstractGraph(object):
         self.delay = graph_conf[
             'delay'] if 'delay' in graph_conf else DEFAULT_DELAY
         self.border = graph_conf['border'] if 'border' in graph_conf else False
+        self.filled_data = render.COLORS[graph_conf[
+            'filled_color'] if 'filled_color' in graph_conf else DEFAULT_FILLED_COLOR]
+        self.border_data = render.COLORS[graph_conf[
+            'border_color'] if 'border_color' in graph_conf else DEFAULT_BORDER_COLOR]
         self.mc = mc
 
     def update(self):
@@ -42,8 +49,8 @@ class Wall(AbstractGraph):
         draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2,
                        layout=self.layout, title=self.title,
                        border=self.border, data=data,
-                       filled_data=render.COLORS['light_blue'],
-                       border_data=render.COLORS['yellow'])
+                       filled_data=self.filled_data,
+                       border_data=self.border_data)
         pass
 
     def cleanup(self):
@@ -84,6 +91,8 @@ class MonitorStatus(AbstractGraph):
 
         self.monitor_id = graph_conf['monitor_id']
         self.layout = graph_conf['layout'] if 'layout' in graph_conf else "xy"
+        self.title = graph_conf[
+            'title'] if 'title' in graph_conf else DEFAULT_TITLE
         self.mc = mc
         self.blink = False
 

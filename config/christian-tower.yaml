@@ -13,6 +13,8 @@
     z: 150
   layout: "yz"
   border: true
+  filled_color: purple
+  border_color: black
 
 - graph2:
   title: "Paris"
@@ -29,6 +31,8 @@
     z: 150
   layout: "yx"
   border: true
+  filled_color: purple
+  border_color: black
 
 - graph3:
   title: "Hack-A-Dog"
@@ -45,6 +49,8 @@
     z: 130
   layout: "yz"
   border: true
+  filled_color: purple
+  border_color: black
 
 - graph4:
   title: "New-York"
@@ -61,6 +67,8 @@
     z: 130
   layout: "yx"
   border: true
+  filled_color: purple
+  border_color: black
 
 - monitor_status1:
   title: ":)"
