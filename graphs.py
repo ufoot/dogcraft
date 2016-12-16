@@ -5,6 +5,8 @@ import fetch
 import render
 import random
 import os
+
+
 class AbstractGraph(object):
 
     def __init__(self, graph_conf, mc):
@@ -79,11 +81,10 @@ class MonitorStatus(AbstractGraph):
         self.layout = graph_conf['layout'] if 'layout' in graph_conf else "xy"
         self.mc = mc
 
-
     def update(self):
         if os.environ.get('DATADOG_DEMO_DATA'):
             data = random.choice([fetch.MONITOR_STATUS_OK,
-                fetch.MONITOR_STATUS_WARN, fetch.MONITOR_STATUS_ALERT])
+                                  fetch.MONITOR_STATUS_WARN, fetch.MONITOR_STATUS_ALERT])
         else:
             data = fetch.get_monitor_status(self.monitor_id)
 

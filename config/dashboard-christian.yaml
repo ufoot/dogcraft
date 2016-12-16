@@ -1,4 +1,5 @@
 - graph1:
+  title: loom1
   type: wall
   query: "avg:kafka.consumer_lag{consumer_group:loom}"
   pos1:
@@ -13,6 +14,7 @@
   border: true
 
 - graph2:
+  title: loom2
   type: wall
   query: "sum:kafka.consumer_lag{consumer_group:loom}"
   pos1:
