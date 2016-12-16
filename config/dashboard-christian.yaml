@@ -1,6 +1,6 @@
 - graph1:
   type: wall
-  query: "avg:system.cpu.idle{*}"
+  query: "avg:kafka.consumer_lag{consumer_group:loom}"
   pos1:
     x: -50
     y: 40
@@ -14,7 +14,7 @@
 
 - graph2:
   type: wall
-  query: "avg:system.cpu.idle{*}"
+  query: "sum:kafka.consumer_lag{consumer_group:loom}"
   pos1:
     x: -40
     y: 40
