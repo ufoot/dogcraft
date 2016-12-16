@@ -19,17 +19,19 @@ if __name__ == '__main__':
 
     # Load dashboards
     for arg in sys.argv[1:]:
+        print(arg)
         dashboards.append(Dashboard(arg, mc))
 
     # Run the update every n seconds
     while True:
-        time.sleep(0.5)
+        time.sleep(1)
         for dashboard in dashboards:
             dashboard.update()
         # TODO: get rid of this once dashboards work
-        points = fetch.get_demo_data()
+        #points = fetch.get_demo_data()
         # print(points)
-        render.draw_flat_wall(
-            mc=mc, pos1=(-30, 30, 75), pos2=(20, 45, 75), layout="xy", border=True, data=points)
-        render.draw_flat_wall(
-            mc=mc, pos1=(-30, 30, 90), pos2=(20, 30, 75), layout="xz", border=True, data=points)
+        # render.draw_flat_wall(
+        #    mc=mc, pos1=(-30, 30, 75), pos2=(20, 45, 75), layout="xy", border=True, data=points)
+        # render.draw_flat_wall(
+        # mc=mc, pos1=(-30, 30, 90), pos2=(20, 30, 75), layout="xz",
+        # border=True, data=points)

@@ -61,8 +61,9 @@ def get_simple_data(query=DEFAULT_QUERY, delay=DEFAULT_DELAY):
     pointlist = []
     try:
         pointlist = res['series'][0]['pointlist']
-    except:
-        raise "bad data %s" % res
+    except Exception as e:
+        print("bad data %s: %s" % (res, e))
+        return []
 
     return simple_normalize(pointlist)
 

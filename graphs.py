@@ -1,26 +1,33 @@
-from fetch import get_simple_data
+from fetch import get_simple_data, get_demo_data
+from render import draw_flat_wall
 
 
 class AbstractGraph(object):
 
     def __init__(self, graph_conf, mc):
-        self.pos1 = graph_conf['pos1']
-        self.pos2 = graph_conf['pos2']
+        self.pos1 = (graph_conf['pos1']['x'], graph_conf[
+                     'pos1']['y'], graph_conf['pos1']['z'])
+        self.pos2 = (graph_conf['pos2']['x'], graph_conf[
+                     'pos2']['y'], graph_conf['pos2']['z'])
         self.query = graph_conf['query']
+        self.layout = graph_conf['layout'] if 'layout' in graph_conf else "xy"
+        self.border = graph_conf['border'] if 'border' in graph_conf else false
         self.mc = mc
 
     def update(self):
         raise Exception("Not implemented")
 
     def get_data(self):
-        return get_simple_data(self.query)
+        # return get_simple_data(self.query)
+        return get_demo_data()
 
 
 class Wall(AbstractGraph):
 
     def update(self):
         data = self.get_data()
-        self.mc.postToChat("Updating wall")
+        draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2,
+                       layout=self.layout, border=self.border, data=data)
         pass
 
 
