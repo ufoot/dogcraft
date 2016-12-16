@@ -1,0 +1,77 @@
+- graph1:
+  title: "DataDog"
+  delay: 900
+  type: wall
+  query: "sum:kafka.consumer_lag{consumer_group:loom}"
+  pos1:
+    x: 300
+    y: 160
+    z: 130
+  pos2:
+    x: 300
+    y: 0
+    z: 150
+  layout: "yz"
+  border: true
+
+- graph2:
+  title: "Paris"
+  delay: 900
+  type: wall
+  query: "avg:kafka.consumer_lag{consumer_group:trace-writer}"
+  pos1:
+    x: 300
+    y: 160
+    z: 150
+  pos2:
+    x: 320
+    y: 0
+    z: 150
+  layout: "yx"
+  border: true
+
+- graph3:
+  title: "Hack-A-Dog"
+  delay: 900
+  type: wall
+  query: "avg:kafka.consumer_lag{consumer_group:resource-writer}"
+  pos1:
+    x: 320
+    y: 160
+    z: 150
+  pos2:
+    x: 320
+    y: 0
+    z: 130
+  layout: "yz"
+  border: true
+
+- graph4:
+  title: "New-York"
+  delay: 900
+  type: wall
+  query: "sum:kafka.consumer_lag{consumer_group:destro}"
+  pos1:
+    x: 320
+    y: 160
+    z: 130
+  pos2:
+    x: 300
+    y: 0
+    z: 130
+  layout: "yx"
+  border: true
+
+- monitor_status1:
+  title: ":)"
+  type: monitor_status
+  monitor_id: 660012
+  pos1:
+    x: 301
+    y: 160
+    z: 149
+  pos2:
+    x: 320
+    y: 160
+    z: 130
+  layout: "xz"

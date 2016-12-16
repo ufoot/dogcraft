@@ -7,7 +7,7 @@ _text_cache = {}
 
 FONT_FILE = "data/FreeSansBold.ttf"
 COLUMN_SPACE = 1
-CHAR_SIZE = 666
+CHAR_SIZE = 1000
 
 
 def initialize_font():

@@ -1,4 +1,3 @@
 #!/bin/sh
 
-python main.py config/dashboard-christian.yaml
-
+python main.py config/christian-dashboard.yaml config/christian-tower.yaml

@@ -108,7 +108,8 @@ class MonitorStatus(AbstractGraph):
         elif data == fetch.MONITOR_STATUS_NO_DATA:
             block_color = render.COLORS['grey']
 
-        draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2, layout=self.layout, border=False, data=[1.0],
+        draw_flat_wall(mc=self.mc, pos1=self.pos1, pos2=self.pos2, layout=self.layout, title=self.title,
+                       border=False, data=[1.0],
                        filled_data=block_color)
 
     def cleanup(self):
