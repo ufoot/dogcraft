@@ -13,6 +13,7 @@ Current features:
 - primitive labeling of graphs, the top corner can show a few cubic letters to remind you what this item is
 - no dirty artefacts left after you're done with it, programs cleans up all the blocks it did put in the first place
 - you can freely move around and play minecraft as you wish, only there are a few blocks dedicated to you total awareness of what's going on in your systems
+- graphs are updated on-the-fly, continuously, several times per minute
 - ...
 
 Caveats:
