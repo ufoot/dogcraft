@@ -26,9 +26,113 @@ Caveats:
 
 ## Dependencies
 
-* [Install PyMinecraft first](setup/README.md)
-* You might be interested by reading https://www.nostarch.com/programwithminecraft
+### Minecraft
+
+#### Install Python requirements
+
+As root:
+
+```
+apt-get install python3 idle3 python3-pip # yes, Python 3, version 2.7 won't work
+apt-get install openjdk-8-jre             # JDK >= 7
+apt-get install git wget
+```
+
+#### Get and build Spigot
+
+```
+export PYMINECRAFT=$HOME/.pyminecraft     # choose a user-writable folder
+install -d $PYMINECRAFT/build             # create the folder
+cd $PYMINECRAFT/build                     # go to the right place
+git config --global --unset core.autocrlf # need this! you can switch it off after
+# now get the latest BuildTools.jar, think of this as a Makefile on steroids
+wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+java -jar BuildTools.jar --rev 1.10.2     # replace 1.10.2 by *YOUR* Minecraft version
+cp craftbukkit*jar $PYMINECRAFT/
+cp spigot*jar $PYMINECRAFT/
+```
+
+#### First start
+
+```
+cat <<EOF > $PYMINECRAFT/start.sh
+#!/bin/sh
+
+java -Xms512M -Xmx1024M -XX:MaxPermSize=128M -jar ./spigot-1.10.2.jar
+EOF
+chmod a+x $PYMINECRAFT/start.sh
+cd $PYMINECRAFT
+./start.sh
+```
+
+At this stage, server should start and ask for EULA agreement.
+Edit the file `eula.txt` (has been created in your directory) and replace
+`eula=false` by `eula=true`
+
+Re-run it, now you should be able to connect on it with a standard Minecraft client,
+using `localhost` as an address. Tip: to change the Minecraft version you're playing with,
+change it in your profile (the first Minecraft screen, before you start the game) there's
+a dropdown where you can decide to stick to a given version.
+
+Stop the game, either `stop` on the prompt or `CTRL-C`.
+
+#### Installing Raspberry Juice
+
+This is a plugin that is *REQUIRED* for the Python API to work. It should be installed
+in the `plugins` directory (typically `/home/<user>/.pyminecraft/plugins`.
+
+https://dev.bukkit.org/bukkit-plugins/raspberryjuice
+
+```
+cd $PYMINECRAFT/build
+wget https://dev.bukkit.org/media/files/917/56/raspberryjuice-1.8.jar
+cp raspberryjuice*jar $PYMINECRAFT/plugins/
+```
+
+Also switch to creative mode:
+
+```
+sed -i "s/gamemode.*/gamemode=1/g" $PYMINECRAFT/server.properties                # creative mode by default
+sed -i "s/force-gamemode.*/force-gamemode=true/g" $PYMINECRAFT/server.properties # force creative mode
+```
+
+#### Install MCPI
+
+```
+cd $PYMINECRAFT/build
+git clone https://github.com/py3minepi/py3minepi
+```
+
+Now, as root:
+
+```
+pip3 install ./py3minepi
+```
+
+Note: an old version, probably Python 2 compatible is available at: https://github.com/martinohanlon/mcpi
+
+#### Final run
+
+- start your server
+- start a client, connect to localhost
+
+From a Python (3!) prompt:
+
+```
+import mcpi.minecraft as minecraft
+s=minecraft.Minecraft.create()
+s.postToChat("hello world")
+```
+
+You might be interested by reading https://www.nostarch.com/programwithminecraft which
+is about how to learn programming with Python and Minecraft.
+
+### Freetype
+
 * Additionnally, this program uses `freetype-py` https://github.com/rougier/freetype-py which you can simply install by `pip install freetype-py`.
+
+### DataDog
+
 * Install the datadog python library https://github.com/DataDog/datadogpy
 * You also need a DataDog account, along with an `APP_KEY` and an `API_KEY`. Refer to http://docs.datadoghq.com/api/ for details
 
