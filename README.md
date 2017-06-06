@@ -161,9 +161,15 @@ Some environnment vars matter:
 
 ## Enjoy
 
-### Screenshot
+### Screenshots
 
-[![A typical screen capture](media/capture-640x360.jpg?raw=true)](media/capture.jpg?raw=true)
+[![Dogcraft Screenshot #1](media/dogcraft-screenshot-1.jpeg?raw=true)](media/dogcraft-screenshot-1.png?raw=true)
+[![Dogcraft Screenshot #2](media/dogcraft-screenshot-2.jpeg?raw=true)](media/dogcraft-screenshot-2.png?raw=true)
+[![Dogcraft Screenshot #3](media/dogcraft-screenshot-3.jpeg?raw=true)](media/dogcraft-screenshot-3.png?raw=true)
+
+[![Dogcraft Screenshot #4](media/dogcraft-screenshot-4.jpeg?raw=true)](media/dogcraft-screenshot-4.png?raw=true)
+[![Dogcraft Screenshot #5](media/dogcraft-screenshot-5.jpeg?raw=true)](media/dogcraft-screenshot-5.png?raw=true)
+[![Dogcraft Screenshot #6](media/dogcraft-screenshot-6.jpeg?raw=true)](media/dogcraft-screenshot-6.png?raw=true)
 
 ### Video
 
