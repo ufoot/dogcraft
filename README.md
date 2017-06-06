@@ -161,7 +161,11 @@ Some environnment vars matter:
 
 ## Enjoy
 
-![A typical screen capture](media/capture.jpg?raw=true "DogCraft screen capture")
+### Screenshot
+
+[![A typical screen capture](media/capture-640x360.jpg?raw=true)](media/capture.jpg?raw=true)
+
+### Video
 
 [![A video demoing the code](https://img.youtube.com/vi/B792Q_dMXrg/0.jpg)](https://www.youtube.com/watch?v=B792Q_dMXrg)
 
