@@ -163,6 +163,8 @@ Some environnment vars matter:
 
 ![A typical screen capture](media/capture.jpg?raw=true "DogCraft screen capture")
 
+[![A video demoing the code](https://img.youtube.com/vi/B792Q_dMXrg/0.jpg)](https://www.youtube.com/watch?v=B792Q_dMXrg)
+
 # TODO
 
 - make it more interactive, so that the "player" can act on the graph, acknowledge alerts...
