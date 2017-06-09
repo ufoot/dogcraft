@@ -5,7 +5,7 @@ _face = None
 _char_cache = {}
 _text_cache = {}
 
-FONT_FILE = "data/FreeSansBold.ttf"
+FONT_FILE = "data/Tuffy_Bold.ttf"
 COLUMN_SPACE = 1
 CHAR_SIZE = 1000
 
